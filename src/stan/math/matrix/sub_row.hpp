@@ -3,7 +3,7 @@
 
 #include <stan/math/matrix/Eigen.hpp>
 #include <stan/math/matrix/validate_row_index.hpp>
-#include <stan/math/matrix/validate_column_index.hpp>
+#include <stan/math/error_handling/matrix/check_valid_column_index.hpp>
 
 namespace stan {
 
@@ -23,8 +23,9 @@ namespace stan {
     sub_row(const Eigen::Matrix<T,Eigen::Dynamic,Eigen::Dynamic>& m,
                size_t i, size_t j, size_t ncols) {
       validate_row_index(m,i,"sub_row");
-      validate_column_index(m,j,"sub_row");
-      if (ncols > 0) validate_column_index(m,j+ncols-1,"sub_row");
+      check_valid_column_index("sub_row(%1%)", m, "m", j);
+      if (ncols > 0) 
+        check_valid_column_index("sub_row(%1%)", m, "m", j+ncols-1);
       return m.block(i - 1,j - 1,1,ncols);
     }
 

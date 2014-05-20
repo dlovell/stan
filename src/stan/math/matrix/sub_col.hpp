@@ -3,7 +3,7 @@
 
 #include <stan/math/matrix/Eigen.hpp>
 #include <stan/math/matrix/validate_row_index.hpp>
-#include <stan/math/matrix/validate_column_index.hpp>
+#include <stan/math/error_handling/matrix/check_valid_column_index.hpp>
 
 namespace stan {
   namespace math {
@@ -23,7 +23,7 @@ namespace stan {
           size_t i, size_t j, size_t nrows) {
       validate_row_index(m,i,"sub_column");
       if (nrows > 0) validate_row_index(m,i+nrows-1,"sub_column");
-      validate_column_index(m,j,"sub_column");
+      check_valid_column_index("sub_column(%1%)", m, "m", j);
       return m.block(i - 1,j - 1,nrows,1);
     }
     

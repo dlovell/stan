@@ -2,7 +2,7 @@
 #define __STAN__MATH__MATRIX__COL_HPP__
 
 #include <stan/math/matrix/Eigen.hpp>
-#include <stan/math/matrix/validate_column_index.hpp>
+#include <stan/math/error_handling/matrix/check_valid_column_index.hpp>
 
 namespace stan {
   namespace math {
@@ -23,7 +23,7 @@ namespace stan {
     Eigen::Matrix<T,Eigen::Dynamic,1>
     col(const Eigen::Matrix<T,Eigen::Dynamic,Eigen::Dynamic>& m,
         size_t j) {
-      validate_column_index(m,j,"col");
+      check_valid_column_index("col(%1%)", m, "m", j);
       return m.col(j - 1);
     }
 

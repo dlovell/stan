@@ -3,7 +3,7 @@
 
 #include <vector>
 #include <stan/math/matrix/Eigen.hpp>
-#include <stan/math/matrix/validate_column_index.hpp>
+#include <stan/math/error_handling/matrix/check_valid_column_index.hpp>
 #include <stan/math/matrix/validate_row_index.hpp>
 #include <stan/math/matrix/validate_std_vector_index.hpp>
 
@@ -35,7 +35,7 @@ namespace stan {
     tail(const Eigen::Matrix<T,1,Eigen::Dynamic>& rv,
          size_t n) {
       if (n != 0)
-        validate_column_index(rv, rv.size() - n + 1, "tail");
+        check_valid_column_index("tail(%1%)", rv, "rv", rv.size() - n + 1);
       return rv.tail(n);
     }
 

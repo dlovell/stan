@@ -94,11 +94,9 @@
 #include <stan/math/matrix/trace_quad_form.hpp>
 #include <stan/math/matrix/transpose.hpp>
 #include <stan/math/matrix/typedefs.hpp>
-#include <stan/math/matrix/validate_column_index.hpp>
 #include <stan/math/matrix/validate_greater.hpp>
 #include <stan/math/matrix/validate_greater_or_equal.hpp>
 #include <stan/math/matrix/validate_less.hpp>
-#include <stan/math/matrix/validate_less_or_equal.hpp>
 #include <stan/math/matrix/validate_matching_dims.hpp>
 #include <stan/math/matrix/validate_matching_sizes.hpp>
 #include <stan/math/matrix/validate_multiplicable.hpp>

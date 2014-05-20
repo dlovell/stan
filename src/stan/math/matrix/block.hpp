@@ -3,7 +3,7 @@
 
 #include <stan/math/matrix/Eigen.hpp>
 #include <stan/math/matrix/validate_row_index.hpp>
-#include <stan/math/matrix/validate_column_index.hpp>
+#include <stan/math/error_handling/matrix/check_valid_column_index.hpp>
 
 namespace stan {
   namespace math {
@@ -24,8 +24,8 @@ namespace stan {
           size_t i, size_t j, size_t nrows, size_t ncols) {
       validate_row_index(m,i,"block");
       validate_row_index(m,i+nrows-1,"block");
-      validate_column_index(m,j,"block");
-      validate_column_index(m,j+ncols-1,"block");
+      check_valid_column_index("block(%1%)", m, "m", j);
+      check_valid_column_index("block(%1%)", m, "m", j+ncols-1);
       return m.block(i - 1,j - 1,nrows,ncols);
     }
 

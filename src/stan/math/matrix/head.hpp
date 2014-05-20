@@ -4,7 +4,7 @@
 #include <vector>
 
 #include <stan/math/matrix/Eigen.hpp>
-#include <stan/math/matrix/validate_column_index.hpp>
+#include <stan/math/error_handling/matrix/check_valid_column_index.hpp>
 #include <stan/math/matrix/validate_row_index.hpp>
 #include <stan/math/matrix/validate_std_vector_index.hpp>
 
@@ -43,7 +43,7 @@ namespace stan {
     head(const Eigen::Matrix<T,1,Eigen::Dynamic>& rv,
          size_t n) {
       if (n != 0) 
-        validate_column_index(rv, n, "head");
+        check_valid_column_index("head(%1%)", rv, "rv", n);
       return rv.head(n);
     }
 
