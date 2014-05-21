@@ -2,7 +2,7 @@
 #define __STAN__MATH__MATRIX__SEGMENT_HPP__
 
 #include <stan/math/matrix/Eigen.hpp>
-#include <stan/math/matrix/validate_row_index.hpp>
+#include <stan/math/error_handling/matrix/check_valid_row_index.hpp>
 #include <stan/math/error_handling/matrix/check_valid_column_index.hpp>
 #include <stan/math/matrix/validate_std_vector_index.hpp>
 
@@ -19,8 +19,9 @@ namespace stan {
     Eigen::Matrix<T,Eigen::Dynamic,1>
     segment(const Eigen::Matrix<T,Eigen::Dynamic,1>& v,
             size_t i, size_t n) {
-      validate_row_index(v, i, "segment");
-      if (n != 0) validate_row_index(v, i + n - 1, "segment");
+      check_valid_row_index("segment(%1%)", v, "v", i);
+      if (n != 0) 
+        check_valid_row_index("segment(%1%)", v, "v", i + n - 1);
       return v.segment(i-1,n);
     }
 

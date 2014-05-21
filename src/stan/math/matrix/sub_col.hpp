@@ -2,7 +2,7 @@
 #define __STAN__MATH__MATRIX__SUB_COL_HPP__
 
 #include <stan/math/matrix/Eigen.hpp>
-#include <stan/math/matrix/validate_row_index.hpp>
+#include <stan/math/error_handling/matrix/check_valid_row_index.hpp>
 #include <stan/math/error_handling/matrix/check_valid_column_index.hpp>
 
 namespace stan {
@@ -21,9 +21,10 @@ namespace stan {
     Eigen::Matrix<T,Eigen::Dynamic,1>
     sub_col(const Eigen::Matrix<T,Eigen::Dynamic,Eigen::Dynamic>& m,
           size_t i, size_t j, size_t nrows) {
-      validate_row_index(m,i,"sub_column");
-      if (nrows > 0) validate_row_index(m,i+nrows-1,"sub_column");
-      check_valid_column_index("sub_column(%1%)", m, "m", j);
+      check_valid_row_index("sub_col(%1%)", m, "m", i);
+      if (nrows > 0) 
+        check_valid_row_index("sub_col(%1%)", m, "m", i+nrows-1);
+      check_valid_column_index("sub_col(%1%)", m, "m", j);
       return m.block(i - 1,j - 1,nrows,1);
     }
     

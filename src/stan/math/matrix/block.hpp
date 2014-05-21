@@ -2,7 +2,7 @@
 #define __STAN__MATH__MATRIX__BLOCK_HPP__
 
 #include <stan/math/matrix/Eigen.hpp>
-#include <stan/math/matrix/validate_row_index.hpp>
+#include <stan/math/error_handling/matrix/check_valid_row_index.hpp>
 #include <stan/math/error_handling/matrix/check_valid_column_index.hpp>
 
 namespace stan {
@@ -22,16 +22,12 @@ namespace stan {
     Eigen::Matrix<T,Eigen::Dynamic,Eigen::Dynamic>
     block(const Eigen::Matrix<T,Eigen::Dynamic,Eigen::Dynamic>& m,
           size_t i, size_t j, size_t nrows, size_t ncols) {
-      validate_row_index(m,i,"block");
-      validate_row_index(m,i+nrows-1,"block");
+      check_valid_row_index("block(%1%)", m, "m", i);
+      check_valid_row_index("block(%1%)", m, "m", i+nrows-1);
       check_valid_column_index("block(%1%)", m, "m", j);
       check_valid_column_index("block(%1%)", m, "m", j+ncols-1);
       return m.block(i - 1,j - 1,nrows,ncols);
     }
-
-
-
-    
     
   }
 }

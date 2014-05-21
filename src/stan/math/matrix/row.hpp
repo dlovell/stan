@@ -2,7 +2,7 @@
 #define __STAN__MATH__MATRIX__ROW_HPP__
 
 #include <stan/math/matrix/Eigen.hpp>
-#include <stan/math/matrix/validate_row_index.hpp>
+#include <stan/math/error_handling/matrix/check_valid_row_index.hpp>
 
 namespace stan {
   namespace math {
@@ -24,7 +24,7 @@ namespace stan {
     Eigen::Matrix<T,1,Eigen::Dynamic>
     row(const Eigen::Matrix<T,Eigen::Dynamic,Eigen::Dynamic>& m, 
         size_t i) {
-      validate_row_index(m,i,"row");
+      check_valid_row_index("row(%1%)", m, "m", i);
       return m.row(i - 1);
     }
 

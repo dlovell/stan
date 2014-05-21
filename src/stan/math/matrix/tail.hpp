@@ -4,7 +4,7 @@
 #include <vector>
 #include <stan/math/matrix/Eigen.hpp>
 #include <stan/math/error_handling/matrix/check_valid_column_index.hpp>
-#include <stan/math/matrix/validate_row_index.hpp>
+#include <stan/math/error_handling/matrix/check_valid_row_index.hpp>
 #include <stan/math/matrix/validate_std_vector_index.hpp>
 
 namespace stan {
@@ -20,7 +20,7 @@ namespace stan {
     tail(const Eigen::Matrix<T,Eigen::Dynamic,1>& v,
          size_t n) {
       if (n != 0)
-        validate_row_index(v, v.size() - n + 1, "tail");
+        check_valid_row_index("tail(%1%)", v, "v", v.size() - n + 1);
       return v.tail(n);
     }
 

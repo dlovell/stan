@@ -101,7 +101,6 @@
 #include <stan/math/matrix/validate_matching_sizes.hpp>
 #include <stan/math/matrix/validate_multiplicable.hpp>
 #include <stan/math/matrix/validate_nonzero_size.hpp>
-#include <stan/math/matrix/validate_row_index.hpp>
 #include <stan/math/matrix/validate_square.hpp>
 #include <stan/math/matrix/validate_std_vector_index.hpp>
 #include <stan/math/matrix/validate_symmetric.hpp>
